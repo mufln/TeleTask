@@ -1,5 +1,4 @@
 import logging
-import sqlite3
 import mysql.connector
 from mysql.connector import Error
 import time
@@ -126,7 +125,7 @@ class dataBaseWorker():
 
     def delOneTimeKey(self, key: str) -> None:
         base, cur = self.connectBase()
-        cur.execute(f"DELETE FROM OneTimeKeys WHERE key_value=%s",(keyGen.getHash(key),))
+        cur.execute(f"DELETE FROM OneTimeKeys WHERE key_value=%s", (keyGen.getHash(key),))
         logging.log(20,"Deleted OneTimeKey")
         cur.close(); base.commit(); base.close()
 
