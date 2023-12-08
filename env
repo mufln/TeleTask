@@ -1,0 +1,7 @@
+export DB_USER=""
+export DB_PASSWORD=""
+export BASE_URL=""
+export SSL_CERT=""
+export SSL_CERT_KEY=""
+export TELETASK_TOKEN=""
+export TELETASK_SECRET=""
