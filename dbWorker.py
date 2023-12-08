@@ -40,26 +40,26 @@ class dataBaseWorker():
     def createTables(self) -> None:
         base,cur = self.connectBase()
         cur.execute("""CREATE TABLE IF NOT EXISTS Auth 
-                    (id INTEGER PRIMARY KEY AUTO_INCREMENT, 
+                    (id BIGINT PRIMARY KEY AUTO_INCREMENT, 
                     user_name TEXT, 
-                    tg_id INTEGER, 
+                    tg_id BIGINT, 
                     password TEXT)""")
-        cur.execute("CREATE TABLE IF NOT EXISTS Subjects (id INTEGER PRIMARY KEY AUTO_INCREMENT, subject_name TEXT, aliases JSON)")
+        cur.execute("CREATE TABLE IF NOT EXISTS Subjects (id BIGINT PRIMARY KEY AUTO_INCREMENT, subject_name TEXT, aliases JSON)")
         cur.execute("""CREATE TABLE IF NOT EXISTS Tasks 
-                    (id INTEGER PRIMARY KEY AUTO_INCREMENT, 
-                    subject_id INTEGER, 
+                    (id BIGINT PRIMARY KEY AUTO_INCREMENT, 
+                    subject_id BIGINT, 
                     description TEXT, 
                     from_date DATE,
                     to_date TEXT, 
                     is_redacting BOOLEAN,
                     FOREIGN KEY (subject_id) REFERENCES Subjects (id) ON DELETE CASCADE)""")
         cur.execute("""CREATE TABLE IF NOT EXISTS Users 
-                    (id INTEGER PRIMARY KEY AUTO_INCREMENT, 
+                    (id BIGINT PRIMARY KEY AUTO_INCREMENT, 
                     user_name TEXT, 
                     group_id TEXT, 
                     finished_tasks JSON, 
-                    redacting_task INTEGER)""")
-        cur.execute("CREATE TABLE IF NOT EXISTS OneTimeKeys (id INTEGER PRIMARY KEY AUTO_INCREMENT, key_value TEXT)")
+                    redacting_task BIGINT)""")
+        cur.execute("CREATE TABLE IF NOT EXISTS OneTimeKeys (id BIGINT PRIMARY KEY AUTO_INCREMENT, key_value TEXT)")
         base.commit(); cur.close(); base.close()
         logging.log(20,"Tables created successfully")
 #-----------------END------------------

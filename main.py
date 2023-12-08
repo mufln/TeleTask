@@ -1,5 +1,3 @@
-import db
-
 from cfg import *
 from handlers import r as router
 import asyncio
@@ -28,7 +26,7 @@ async def setWebhook(bot):
 
 def main() -> None:
     bot, dp = prepBot()
-    db.register(setWebhook)
+    dp.register(setWebhook)
     app = web.Application()
     webhook_requests_handler = SimpleRequestHandler(
         dispatcher=dp,

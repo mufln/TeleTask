@@ -137,15 +137,15 @@ async def registerNewUser(message: types.Message, state: FSMContext):
         await message.answer("Вы уже авторизованы😌")
         await help(message, state)
         return
-    await message.answer("Введите ключ доступа для продолжения работы🙃\nНапишите /login,если у вас уже есть учетная запись")
+    await message.answer("Введите любой набор символов для продолжения работы(мне лень переписывать регистрацию) 🙃\nНапишите /login,если у вас уже есть учетная запись")
     await state.set_state(Register.waitingForKey)
 
 
 @r.message(Register.waitingForKey)
 async def verifyKey(message: types.Message, state: FSMContext):
-    if not db.verifyOneTimeKey(message.text):
-        await message.answer("Неверный ключ, попробуй еще раз🙄")
-    else:
+    # if not db.verifyOneTimeKey(message.text):
+    #     await message.answer("Неверный ключ, попробуй еще раз🙄")
+    # else:
         await state.update_data(usedKey = message.text)
         await message.answer("Введите имя пользователя"
                       "\nНапример: Adskiy_Botan"
