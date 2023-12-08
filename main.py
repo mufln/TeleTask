@@ -1,3 +1,5 @@
+import db
+
 from cfg import *
 from handlers import r as router
 import asyncio
@@ -18,11 +20,15 @@ async def dropWebhook(bot):
 
 async def setWebhook(bot):
     await bot.dropWebhook()
-    await bot.set_webhook(url = WEBHOOK_URL + WEBHOOK_PATH, drop_pending_updates = True, certificate=FSInputFile(SSL_CERT))
+    await bot.set_webhook(url = f"{WEBHOOK_URL}{WEBHOOK_PATH}",
+                          drop_pending_updates = True,
+                          certificate=FSInputFile(SSL_CERT),
+                          secret_token=WEBHOOK_SECRET)
 
 
 def main() -> None:
     bot, dp = prepBot()
+    db.register(setWebhook)
     app = web.Application()
     webhook_requests_handler = SimpleRequestHandler(
         dispatcher=dp,
