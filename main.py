@@ -17,7 +17,7 @@ async def dropWebhook(bot):
 
 
 async def setWebhook(bot):
-    await bot.removeWebhook()
+    await dropWebhook(bot)
     await bot.set_webhook(url = f"{WEBHOOK_URL}{WEBHOOK_PATH}",
                           drop_pending_updates = True,
                           certificate=FSInputFile(SSL_CERT),
