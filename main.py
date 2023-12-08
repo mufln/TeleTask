@@ -26,7 +26,7 @@ async def setWebhook(bot):
 
 def main() -> None:
     bot, dp = prepBot()
-    dp.register(setWebhook)
+    dp.startup.register(setWebhook)
     app = web.Application()
     webhook_requests_handler = SimpleRequestHandler(
         dispatcher=dp,
